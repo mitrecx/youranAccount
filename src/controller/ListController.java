@@ -25,7 +25,6 @@ public class ListController {
 			SqlSessionFactory ssf=ssfb.build(reader);
 			SqlSession sSession=ssf.openSession();
 			list=sSession.selectList("findAll1");
-			System.out.println("=============list.do===");
 			for(AccInfo a:list) {
 				System.out.println(a.getTrade_time()+"  "+a.getManager());
 			}
