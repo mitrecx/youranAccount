@@ -15,48 +15,24 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import entity.User;
 /**
  * 
- * @description ¶¨ÒåÒ»¸öÀ¹½ØÆ÷£¬ÊµÏÖHandlerInterceptor
- * @author ³ÂÐË
+ * @description æ‹¦æˆªå™¨HandlerInterceptor
+ * @author cx
  * @tags
  */
 public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		System.out.println("preHandle...");
-//		HttpSession session=request.getSession();
-//		//Èç¹ûµÇÂ¼¹ý£¬·µ»Øtrue£¬¼ÌÐøÖ´ÐÐmvcºóÐøÁ÷³Ì
-//		if(session.getAttribute("user")!=null) {
-//			return true;
-//		}else {
-//			//Èç¹ûÃ»ÓÐµÇÂ¼¹ý£¬ÖØ¶¨Ïòµ½µÇÂ¼Ò³Ãæ£¬ÖÕÖ¹mvcºóÐøÁ÷³Ì
-//			response.sendRedirect("login.do");
-//			return false;
-//		}
-//		String uri=request.getRequestURI();
-//		String action=uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
-//		System.out.println(action);
-//		if(action.equals("/login")) {
-//			String userName=request.getParameter("username");
-//			String password=request.getParameter("password");
-//	
-//			SqlSessionFactoryBuilder ssfb=new SqlSessionFactoryBuilder();
-//			Reader reader= Resources.getResourceAsReader("sqlMapConfig.xml");
-//			SqlSessionFactory ssf=ssfb.build(reader);
-//			SqlSession sSession=ssf.openSession();
-//			User user=sSession.selectOne("findUserByUsername",userName);
-//			if(null!=user) {
-//				System.out.println(user.getName());
-//				if(password.equals(user.getPassword())) {
-//					session.setAttribute("user", userName);
-//					response.sendRedirect("acclist.do");
-//					return true;
-//				}else {
-//					request.setAttribute("loginFailed", "ÃÜÂë´íÎó");
-//					System.out.println("ÃÜÂë´íÎó");
-//				}
-//			}
-//		}
-//
-		return true;
+		HttpSession session=request.getSession();
+		if(session.getAttribute("user")!=null) {
+			System.out.println("sessionä¸­æœ‰user");
+			return true;
+		}else {
+			//ä¸ºä»€ä¹ˆè¿™ä¸ªAttributeæ²¡æœ‰è¢«login.jsp æŽ¥æ”¶åˆ°ï¼Ÿï¼Ÿ
+			request.setAttribute("loginFailed", "æœªç™»å½•ï¼Œè¯·å…ˆç™»å½•");
+			response.sendRedirect("login.do");
+			System.out.println("æ²¡æœ‰user");
+			return false;
+		}
 	}
 }

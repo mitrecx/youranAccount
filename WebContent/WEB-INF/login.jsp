@@ -7,7 +7,7 @@
 		<title>Insert title here</title>
 	</head>
 	<body style="font-size: 30px;">
-		<form action="login.do" method="post">
+		<form action="checkup.do" method="post">
 			<fieldset>
 				<legend>登录</legend>
 				用户名：<input name="username" />
@@ -18,5 +18,6 @@
 		</form>
 		<% String msg=(String)request.getAttribute("loginFailed") ;%>
 		<span style="color:red;"><%= msg==null ? "" : msg %></span>
+		<a href="http://localhost:8080/youran-account/list.do">list</a>
 	</body>
 </html>
